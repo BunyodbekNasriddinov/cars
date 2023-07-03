@@ -14,6 +14,9 @@ CREATE TABLE images (
 CREATE TABLE models (
   model_id SERIAL NOT NULL PRIMARY KEY,
   model_name VARCHAR(64) NOT NULL,
+  creted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT NULL,
+  deleted_at TIMESTAMP DEFAULT NULL,
   img_id INT REFERENCES images(img_id)
 );
 
@@ -27,6 +30,9 @@ CREATE TABLE cars (
   car_motor VARCHAR(16) NOT NULL,
   car_desc VARCHAR(64) NOT NULL,
   car_gearbook VARCHAR(16) NOT NULL,
+  creted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT NULL,
+  deleted_at TIMESTAMP DEFAULT NULL,
   model_id INT REFERENCES models(model_id),
   admin_id INT REFERENCES admins(admin_id)
 );

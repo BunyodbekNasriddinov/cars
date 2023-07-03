@@ -1,7 +1,7 @@
-import pg, { Pool, QueryResult } from "pg"
+import pg, { Pool } from "pg"
 import { BadRequestError } from "./errors"
 
-const pool: Pool = new Pool({
+const pool: Pool = new pg.Pool({
   connectionString: process.env.PG_CONNECTION_STRING,
 })
 
