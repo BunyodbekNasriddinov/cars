@@ -1,5 +1,6 @@
 import multer from "multer"
 import { resolve } from "path"
+import { IRequest } from "../types"
 
 export default multer({
   storage: multer.diskStorage({
@@ -12,6 +13,23 @@ export default multer({
       cb(null, file.fieldname + "-" + uniqueSuffix)
     },
   }),
+
+  fileFilter: (req: IRequest, file, cb) => {
+    const { mimetype } = file
+
+    if (
+      mimetype === "image/png" ||
+      mimetype === "image/jpg" ||
+      mimetype === "image/gif" ||
+      mimetype === "image/webp" ||
+      mimetype === "image/jpeg"
+    )
+      return cb(null, true)
+
+    cb(null, false)
+    return (req.fileFormatter =
+      "Only .png, .jpg, .jpeg, .gif, .webp format allowed!")
+  },
 
   limits: {
     fileSize: 5 * 1024 * 1024,
